@@ -7,8 +7,6 @@ const app = express()
 
 app.use('/dist', express.static(path.resolve(__dirname, 'dist')))
 
-app.listen(PORT, () => console.log(`your app is runnnig on ${PORT}`))
-
 // ssr
 app.get('/', (req, res) => {
     return serverRender(res, 'hello SSR!')
@@ -29,3 +27,5 @@ app.get('/client', (req, res) => {
     `
     res.send(response)
 })
+
+app.listen(PORT, () => console.log(`your app is runnnig on ${PORT}`))
