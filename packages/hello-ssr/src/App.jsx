@@ -1,6 +1,3 @@
-/**
- * Your main app, uses styled components for styling
- */
 import React, { Component } from 'react'
 import styled from 'styled-components'
 import { IS_BROWSER } from './constants'

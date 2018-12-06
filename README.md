@@ -128,22 +128,22 @@ For our SSR example project, configuration file will not be complex and hundres 
 const path = require('path')
 
 module.exports = {
-    // mode is added since webpack version 4.
-    // it gives you out of the box default configurations.
+    // webpack 4 provides you with reasonable default configurations
+    // Check https://webpack.js.org/concepts/mode/
     mode: 'development',
-    // entry literally means where to start bundle your files
+    // render.jsx will be our entry point
     entry: {
-        // we need two entries. One for SSR and one for client side rendering
-        client: './src/client.jsx',
-        bundle: './src/bundle.jsx',
+        bundle: './src/render.jsx',
     },
-    // Directory for compiled js files
     output: {
         path: path.resolve(__dirname, 'dist'),
         filename: '[name].js',
     },
+    // Now webpack can tell .jsx file from .js files
+    resolve: {
+        extensions: ['.js', '.jsx'],
+    },
     module: {
-        // babel loader uses .babelrc
         rules: [
             {
                 test: /\.jsx?$/,
@@ -165,7 +165,9 @@ done
 
 Use `styled-components` and `RenderToNodeStream` api.
 
-Read documents thoroughly.
+useful tools:
+
+-   babel-plugin-styled-components: makes classnames more readable so that make it easy to debug styles
 
 ## Integrating Redux/ReduxSaga
 

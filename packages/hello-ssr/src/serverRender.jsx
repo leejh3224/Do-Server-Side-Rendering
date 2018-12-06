@@ -1,6 +1,5 @@
 /**
- * Uses renderToNodeStream api.
- * Implementation is from https://www.styled-components.com/docs/advanced#server-side-rendering
+ * Check https://www.styled-components.com/docs/advanced#server-side-rendering
  */
 import React from 'react'
 import { renderToNodeStream } from 'react-dom/server'
