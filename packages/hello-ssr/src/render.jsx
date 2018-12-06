@@ -4,5 +4,8 @@
 import React from 'react'
 import { render } from 'react-dom'
 import App from './App'
+import { IS_BROWSER } from './constants'
 
-render(<App />, document.getElementById('app'))
+if (IS_BROWSER) {
+    render(<App />, document.getElementById('root'))
+}

@@ -8,5 +8,8 @@
         "bb": "babel src -d ssr",
         "build": "yarn wp && yarn bb",
         "start": "npx nodemon ./"
+    },
+    "devDependencies": {
+        "babel-plugin-styled-components": "^1.9.2"
     }
 }

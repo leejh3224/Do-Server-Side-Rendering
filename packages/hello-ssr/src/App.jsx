@@ -3,6 +3,7 @@
  */
 import React, { Component } from 'react'
 import styled from 'styled-components'
+import { IS_BROWSER } from './constants'
 
 class App extends Component {
     componentDidMount() {
@@ -10,8 +11,6 @@ class App extends Component {
     }
 
     render() {
-        const isBrowser = () =>
-            typeof window !== 'undefined' && window.document !== 'undefined'
         const FancyBackground = styled.div`
             height: 300px;
             padding: 16px;
@@ -24,7 +23,7 @@ class App extends Component {
 
         return (
             <FancyBackground>
-                hello world from {isBrowser() ? 'browser' : 'server'}
+                hello world from {IS_BROWSER ? 'browser' : 'server'}
             </FancyBackground>
         )
     }

@@ -7,9 +7,9 @@ import { renderToNodeStream } from 'react-dom/server'
 import { ServerStyleSheet } from 'styled-components'
 import App from './App'
 
-export default (res, title, script) => {
+export default (res, title) => {
     res.write(
-        `<html><head><title>${title}</title></head><body style="margin: 0;">`,
+        `<html><head><title>${title}</title></head><body style="margin: 0;"><div id="root">`,
     )
     const sheet = new ServerStyleSheet()
     const jsx = sheet.collectStyles(<App />)
@@ -20,5 +20,7 @@ export default (res, title, script) => {
         { end: false },
     )
 
-    stream.on('end', () => res.end(`${script}</body></html>`))
+    stream.on('end', () =>
+        res.end(`</div><script src="dist/bundle.js"></script></body></html>`),
+    )
 }

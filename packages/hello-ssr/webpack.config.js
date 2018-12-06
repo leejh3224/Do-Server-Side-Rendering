@@ -3,8 +3,7 @@ const path = require('path')
 module.exports = {
     mode: 'development',
     entry: {
-        client: './src/render.jsx',
-        server: './src/hydrate.jsx',
+        bundle: './src/render.jsx',
     },
     output: {
         path: path.resolve(__dirname, 'dist'),
