@@ -1,7 +1,7 @@
 /**
  * Html template file for rendering on client side
  */
-module.exports = title => {
+export default (title, script) => {
     return `<!DOCTYPE html>
               <html lang="en">
               <head>
@@ -10,7 +10,7 @@ module.exports = title => {
               </head>
               <body style="margin: 0px; padding: 0px;">
                 <div id="app"></div>
-                <script src="dist/bundle.js"> </script>
+                ${script}
               </body>
               </html>
               `

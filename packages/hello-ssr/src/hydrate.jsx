@@ -3,6 +3,6 @@
  */
 import React from 'react'
 import { hydrate } from 'react-dom'
-import App from './App.jsx'
+import App from './App'
 
-hydrate(<App />, document.querySelector('#app'))
+hydrate(<App />, document.getElementById('app'))

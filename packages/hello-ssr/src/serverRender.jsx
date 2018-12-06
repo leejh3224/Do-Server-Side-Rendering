@@ -7,7 +7,7 @@ import { renderToNodeStream } from 'react-dom/server'
 import { ServerStyleSheet } from 'styled-components'
 import App from './App'
 
-module.exports = (res, title) => {
+export default (res, title, script) => {
     res.write(
         `<html><head><title>${title}</title></head><body style="margin: 0;">`,
     )
@@ -20,5 +20,5 @@ module.exports = (res, title) => {
         { end: false },
     )
 
-    stream.on('end', () => res.end('</body></html>'))
+    stream.on('end', () => res.end(`${script}</body></html>`))
 }
