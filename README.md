@@ -56,6 +56,8 @@ It definitely enhances UX (user experiece), because you don't have to wait until
 
 This also helps Google Bots to crawl your site.
 
+You can see how google sees your sites by checking this site. ([BROWSEO](http://www.browseo.net/))
+
 Cons:
 
 1. Complicated implementation / Few resources to see and try

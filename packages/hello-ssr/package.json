@@ -1,0 +1,12 @@
+{
+    "name": "@junhyung3224/hello-ssr",
+    "version": "1.0.0",
+    "main": "index.js",
+    "license": "MIT",
+    "scripts": {
+        "wp": "webpack --config webpack.config.js",
+        "bb": "babel src -d ssr",
+        "build": "yarn wp && yarn bb",
+        "start": "npx nodemon ./"
+    }
+}

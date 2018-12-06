@@ -1,14 +1,12 @@
 {
-    "name": "do-ssr",
+    "name": "@junhyung3224/do-ssr",
     "version": "1.0.0",
     "main": "index.js",
+    "private": true,
+    "workspaces": [
+        "packages/*"
+    ],
     "license": "MIT",
-    "scripts": {
-        "wp": "webpack --config webpack.config.js",
-        "bb": "babel src -d ssr",
-        "build": "yarn wp && yarn bb",
-        "start": "npx nodemon ./"
-    },
     "dependencies": {
         "express": "^4.16.4",
         "react": "^16.6.3",
