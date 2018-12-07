@@ -39,7 +39,7 @@ class App extends Component {
             margin: 0 8px;
         `
 
-        const { counter, increment, decrement } = this.props
+        const { counter, increment, decrement, incrementAsync } = this.props
 
         return (
             <FancyBackground>
@@ -48,6 +48,9 @@ class App extends Component {
                 <div>
                     <CounterButton onClick={increment}>+</CounterButton>
                     <CounterButton onClick={decrement}>-</CounterButton>
+                    <CounterButton onClick={incrementAsync}>
+                        Async +
+                    </CounterButton>
                 </div>
             </FancyBackground>
         )
@@ -59,5 +62,5 @@ const mapDispatchToProps = counterActions
 
 export default connect(
     mapStateToProps,
-    mapDispatchToProps
+    mapDispatchToProps,
 )(App)

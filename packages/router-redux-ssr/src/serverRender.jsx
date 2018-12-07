@@ -4,31 +4,30 @@
 import React from 'react'
 import { renderToNodeStream } from 'react-dom/server'
 import { ServerStyleSheet } from 'styled-components'
-import { createStore } from 'redux'
 import { Provider } from 'react-redux'
 import { StaticRouter } from 'react-router-dom'
 import Routes from './Routes'
-import reducers from './reducers'
+import configureStore from './configureStore'
 
 export default (req, res, title) => {
     res.write(
-        `<html><head><title>${title}</title></head><body style="margin: 0;"><div id="root">`
+        `<html><head><title>${title}</title></head><body style="margin: 0;"><div id="root">`,
     )
     const context = {}
-    const store = createStore(reducers)
+    const store = configureStore()
     const sheet = new ServerStyleSheet()
     const jsx = sheet.collectStyles(
         <StaticRouter location={req.url} context={context}>
             <Provider store={store}>
                 <Routes />
             </Provider>
-        </StaticRouter>
+        </StaticRouter>,
     )
     const stream = sheet.interleaveWithNodeStream(renderToNodeStream(jsx))
 
     stream.pipe(
         res,
-        { end: false }
+        { end: false },
     )
 
     const preloadedState = store.getState()
@@ -38,11 +37,11 @@ export default (req, res, title) => {
                 </div>
                 <script>
                     window.__PRELOADED_STATE__ = ${JSON.stringify(
-        preloadedState
-    ).replace(/</g, '\\u003c')}
+                        preloadedState,
+                    ).replace(/</g, '\\u003c')}
                 </script>
                 <script src="dist/bundle.js"></script>
             </body>
-        </html>`)
+        </html>`),
     )
 }
