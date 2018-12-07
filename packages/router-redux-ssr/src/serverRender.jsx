@@ -9,10 +9,13 @@ import { StaticRouter } from 'react-router-dom'
 import Routes from './Routes'
 import configureStore from './configureStore'
 
-export default (req, res, title) => {
+export default (req, res) => {
+    const title = 'hello, router-redux-ssr!'
+
     res.write(
-        `<html><head><title>${title}</title></head><body style="margin: 0;"><div id="root">`,
+        `<html><head><title>${title}</title></head><body style="margin: 0;"><div id="root">`
     )
+
     const context = {}
     const store = configureStore()
     const sheet = new ServerStyleSheet()
@@ -21,13 +24,13 @@ export default (req, res, title) => {
             <Provider store={store}>
                 <Routes />
             </Provider>
-        </StaticRouter>,
+        </StaticRouter>
     )
     const stream = sheet.interleaveWithNodeStream(renderToNodeStream(jsx))
 
     stream.pipe(
         res,
-        { end: false },
+        { end: false }
     )
 
     const preloadedState = store.getState()
@@ -37,11 +40,11 @@ export default (req, res, title) => {
                 </div>
                 <script>
                     window.__PRELOADED_STATE__ = ${JSON.stringify(
-                        preloadedState,
-                    ).replace(/</g, '\\u003c')}
+        preloadedState
+    ).replace(/</g, '\\u003c')}
                 </script>
                 <script src="dist/bundle.js"></script>
             </body>
-        </html>`),
+        </html>`)
     )
 }

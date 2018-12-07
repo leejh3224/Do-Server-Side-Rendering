@@ -6,8 +6,7 @@
     "scripts": {
         "wp": "webpack --config webpack.config.js -w",
         "bb": "babel src -d ssr -w",
-        "build": "yarn wp && yarn bb",
         "start": "npx nodemon ./",
-        "dev": "npm-run-all --parallel build start"
+        "dev": "npm-run-all --parallel wp bb start"
     }
 }
