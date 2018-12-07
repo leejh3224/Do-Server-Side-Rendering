@@ -8,7 +8,7 @@
     -   Babel & Webpack for SSR
     -   Hello, SSR
     -   Styling SSR app
-    -   Integrating Redux/ReduxSaga
+    -   Integrating Router/Redux/ReduxSaga
     -   Use out-of-the-box SSR framework, NEXT.js
     -   Recommended VScode settings
     -   References
@@ -91,27 +91,7 @@ And will focus on 'how to use them'.
     So, in order to run frontend codes in server side, you have to convert your
     code into something that Node.js can undertand.
 
-Babel:
-
-It turns your frontend code into the code that Node.js can understand so that run it.
-
-There are so many js jargons, but I'll try hard to explain those in plain english.
-
-First off you should add `.babelrc` file in your root directory.
-
-As the name gives you some sense, it is way Babel parses and compiles your code.
-
-There are some plugins/presets we should install.
-
-We'll use `@babel/preset-env` and `@babel/preset-react`.
-
-Make a file named `.babelrc` and copy & paste below code into it.
-
-```json
-{
-    "presets": ["@babel/env", "@babel/react"]
-}
-```
+Babel: turns your frontend code into the code that Node.js can understand so that run it.
 
 Webpack:
 
@@ -123,7 +103,7 @@ So if x.js requires y.js file or vise versa, webpack will handle this for you.
 
 It is also required to load static assets like html, css, images into your js projects.
 
-For our SSR example project, configuration file will not be complex and hundres lines of code.
+For our SSR example project, configuration file will look something like below.
 
 ```js
 const path = require('path')
@@ -156,23 +136,21 @@ module.exports = {
 }
 ```
 
-Ok, it's done for Babel and Webpack, hoorayyyy!
-
 ## Hello, SSR
 
-done
+check /packages/hello-ssr
 
 ## Styling SSR app
 
-Use `styled-components` and `RenderToNodeStream` api.
+check [styled-components#Advanced](https://www.styled-components.com/docs/advanced#server-side-rendering)
 
 useful tools:
 
 -   babel-plugin-styled-components: makes classnames more readable so that make it easy to debug styles
 
-## Integrating Redux/ReduxSaga
+## Integrating Router/Redux/ReduxSaga
 
-will do it soon
+check /packages/router-redux-ssr
 
 ## Use out-of-the-box SSR framework, Next.js
 
@@ -190,6 +168,8 @@ extensions:
     -   Auto Rename Tag
     -   Prettier
     -   Theme: Ayu
+    -   vecode-styled-components
+    -   ESLint
 
 ## References
 
