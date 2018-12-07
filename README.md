@@ -17,12 +17,12 @@
 
 If all you want is working SSR code sample, you don't have to read all this.
 
-```
-yarn build && yarn start or
-npm run build && npm start
+```bash
+yarn && yarn run#[package_number]
+# you can check packages under packages folder
 ```
 
-Above command will create directory `ssr` under root directory.
+Above command will create directory `ssr` under specified package folder.
 
 And you're good to go.
 
