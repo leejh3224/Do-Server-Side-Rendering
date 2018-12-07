@@ -4,9 +4,10 @@
     "main": "index.js",
     "license": "MIT",
     "scripts": {
-        "wp": "webpack --config webpack.config.js",
-        "bb": "babel src -d ssr",
+        "wp": "webpack --config webpack.config.js -w",
+        "bb": "babel src -d ssr -w",
         "build": "yarn wp && yarn bb",
-        "start": "npx nodemon ./"
+        "start": "npx nodemon ./",
+        "dev": "npm-run-all --parallel build start"
     }
 }

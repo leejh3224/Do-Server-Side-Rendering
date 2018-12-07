@@ -8,9 +8,7 @@ const app = express()
 app.use('/dist', express.static(path.resolve(__dirname, 'dist')))
 
 // ssr
-app.get('/', (req, res) => {
-    return serverRender(res, 'hello SSR!')
-})
+app.get('/', (req, res) => serverRender(res, 'hello SSR!'))
 
 // client side rendering
 app.get('/client', (req, res) => {

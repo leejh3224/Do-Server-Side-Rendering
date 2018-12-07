@@ -4,15 +4,10 @@
     "main": "index.js",
     "license": "MIT",
     "scripts": {
-        "wp": "webpack --config webpack.config.js",
-        "bb": "babel src -d ssr",
+        "wp": "webpack --config webpack.config.js -w",
+        "bb": "babel src -d ssr -w",
         "build": "yarn wp && yarn bb",
-        "start": "npx nodemon ./"
-    },
-    "dependencies": {
-        "react-redux": "^6.0.0",
-        "react-router-dom": "^4.3.1",
-        "redux": "^4.0.1",
-        "redux-saga": "^0.16.2"
+        "start": "npx nodemon ./",
+        "dev": "npm-run-all --parallel build start"
     }
 }

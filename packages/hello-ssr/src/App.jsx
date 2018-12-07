@@ -9,7 +9,12 @@ class App extends Component {
 
     render() {
         const FancyBackground = styled.div`
-            height: 300px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            width: 100vw;
+            height: 100vh;
             padding: 16px;
             background: radial-gradient(
                 circle at bottom center,
@@ -20,7 +25,8 @@ class App extends Component {
 
         return (
             <FancyBackground>
-                hello world from {IS_BROWSER ? 'browser' : 'server'}
+                hello world from
+                {IS_BROWSER ? 'browser' : 'server'}
             </FancyBackground>
         )
     }

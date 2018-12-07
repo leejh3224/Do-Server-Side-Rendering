@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import styled from 'styled-components'
-import { increment, decrement } from './reducers/actions'
+import { counterActions } from './reducers/actions'
 
 class App extends Component {
     componentDidMount() {
@@ -55,9 +55,9 @@ class App extends Component {
 }
 
 const mapStateToProps = ({ counter }) => ({ counter })
-const mapDispatchToProps = { increment, decrement }
+const mapDispatchToProps = counterActions
 
 export default connect(
     mapStateToProps,
-    mapDispatchToProps,
+    mapDispatchToProps
 )(App)
