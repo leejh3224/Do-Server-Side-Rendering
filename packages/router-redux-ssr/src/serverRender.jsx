@@ -8,43 +8,46 @@ import { Provider } from 'react-redux'
 import { StaticRouter } from 'react-router-dom'
 import Routes from './Routes'
 import configureStore from './configureStore'
+import { fetchCounter } from './api/counter'
 
 export default (req, res) => {
-    const title = 'hello, router-redux-ssr!'
+    fetchCounter(result => {
+        const title = 'hello, router-redux-ssr!'
 
-    res.write(
-        `<html><head><title>${title}</title></head><body style="margin: 0;"><div id="root">`
-    )
+        res.write(
+            `<html><head><title>${title}</title></head><body style="margin: 0;"><div id="root">`
+        )
 
-    const context = {}
-    const store = configureStore()
-    const sheet = new ServerStyleSheet()
-    const jsx = sheet.collectStyles(
-        <StaticRouter location={req.url} context={context}>
-            <Provider store={store}>
-                <Routes />
-            </Provider>
-        </StaticRouter>
-    )
-    const stream = sheet.interleaveWithNodeStream(renderToNodeStream(jsx))
+        const context = {}
+        const store = configureStore()
+        const sheet = new ServerStyleSheet()
+        const jsx = sheet.collectStyles(
+            <StaticRouter location={req.url} context={context}>
+                <Provider store={store}>
+                    <Routes />
+                </Provider>
+            </StaticRouter>
+        )
+        const stream = sheet.interleaveWithNodeStream(renderToNodeStream(jsx))
 
-    stream.pipe(
-        res,
-        { end: false }
-    )
+        stream.pipe(
+            res,
+            { end: false }
+        )
 
-    const preloadedState = store.getState()
+        const preloadedState = { counter: result } || store.getState()
 
-    stream.on('end', () =>
-        res.end(`
-                </div>
-                <script>
-                    window.__PRELOADED_STATE__ = ${JSON.stringify(
+        stream.on('end', () =>
+            res.end(`
+                    </div>
+                    <script>
+                        window.__PRELOADED_STATE__ = ${JSON.stringify(
         preloadedState
     ).replace(/</g, '\\u003c')}
-                </script>
-                <script src="dist/bundle.js"></script>
-            </body>
-        </html>`)
-    )
+                    </script>
+                    <script src="dist/bundle.js"></script>
+                </body>
+            </html>`)
+        )
+    })
 }

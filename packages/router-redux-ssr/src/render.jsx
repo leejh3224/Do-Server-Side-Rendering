@@ -19,5 +19,5 @@ render(
             <Routes />
         </Provider>
     </Router>,
-    document.getElementById('root'),
+    document.getElementById('root')
 )
