@@ -5,11 +5,12 @@
     -   Getting Started
     -   What is SSR?
     -   Cons & Pros of SSR
+    -   Alternatives
     -   Babel & Webpack for SSR
     -   Hello, SSR
     -   Styling SSR app
     -   Integrating Router/Redux/ReduxSaga
-    -   Use out-of-the-box SSR framework, NEXT.js
+    -   SSR frameworks
     -   Recommended VScode settings
     -   References
 
@@ -76,6 +77,37 @@ good at handling babel/webpack or SSR in overall, you'll be lost in the middle o
 Most of the mid to large size React projects uses Redux for state management. (Redux is de facto standard for state management in React community)
 
 So it is required to hydrate and fetch data on server side, however, its implementation is also really tricky.
+
+3. Increased burden on your server
+
+Client Side Rendered apps, typically using CRA, doesn't require a server to work because they are static websites.
+
+However, if you want to render your apps on server side, you have to pay for them.
+
+## Alternatives
+
+SSR is not that easy. You should master some tools like webpack/babel + SSR libraries.
+
+And also your project will become hard to manage due to increased complexity of the project.
+
+So what you should think about before you just dive into SSR stuff is that "Do you really need SSR?".
+
+SSR is great. It helps Google Bots (+ other search engines) to crawl your site more easily so that your sites will have higher chance to be searched thus boost the number of visitors.
+
+However, it doesn't mean that client side rendered pages are not at all crawled by Bots.
+
+And faster first paint (moment when users can see some html/css) doesn't always increase UX.
+
+Why? Because users have to wait js bundles to be loaded for some interactions like cliking a button or opening a tab.
+
+So even if your html comes really quick but js bundles takes 10 or more seconds to be loaded, it will definitely harm UX.
+
+Then what are the alternatives?
+
+-   Client Side Rendering with code-splitting/bundle optimization: code-splitting will help you reduce your main bundle size so that it loads faster.
+    And some bundle optimization techniques like gzip compression, splitting vendor chunks, etc will increase performace too.
+
+-   Facebook/Instagram style loading animation: some meaningful css animation will help your users happy to sit and wait for your content to be loaded.
 
 ## Babel & Webpack for SSR
 
@@ -152,13 +184,12 @@ useful tools:
 
 check /packages/router-redux-ssr
 
-## Use out-of-the-box SSR framework, Next.js
+## SSR frameworks
 
-Sometimes, it is better to start with frameworks like Next.js which offers pre configured SSR settings for you.
-
-However, you should consider that Next.js is pretty opinionated framework and there are less documents/resources for
-
-configuring tools like redux.
+-   Next.js: more like opinionated SSR framework
+-   Razzle: more like CRA with SSR + HMR (Hot Module Reloading)
+-   Gatsby
+-   React-static
 
 ## Recommended VScode settings
 
@@ -173,4 +204,17 @@ extensions:
 
 ## References
 
+### SSR
+
 -   [Server-side rendering your React app in three simple steps](https://medium.freecodecamp.org/server-side-rendering-your-react-app-in-three-simple-steps-7a82b95db82e)
+-   [Server-side Rendering - Totally Tooling Tips](https://www.youtube.com/watch?time_continue=16&v=RAhYnK0v3rk)
+-   [Is SSR with React worth it?](http://blog.jakoblind.no/is-ssr-worth-it/)
+
+### Code Splitting
+
+-   [Webpack (v4) Code Splitting using SplitChunksPlugin](https://itnext.io/react-router-and-webpack-v4-code-splitting-using-splitchunksplugin-f0a48f110312)
+-   [The 100% correct way to split your chunks with Webpack](https://hackernoon.com/the-100-correct-way-to-split-your-chunks-with-webpack-f8a9df5b7758)
+
+## Issues
+
+-   React Loadable or other code-splitting libraries doesn't work well on server side with webpack 4

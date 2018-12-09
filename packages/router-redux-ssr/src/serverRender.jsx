@@ -21,7 +21,7 @@ export default (req, res) => {
             const title = 'hello, router-redux-ssr!'
 
             res.write(
-                `<html><head><title>${title}</title></head><body style="margin: 0;"><div id="root">`
+                `<!DOCTYPE html><html><head><title>${title}</title></head><body style="margin: 0;"><div id="root">`
             )
 
             const store = configureStore()
