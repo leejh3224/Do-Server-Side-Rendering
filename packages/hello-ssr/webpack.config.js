@@ -1,34 +1,12 @@
-const path = require('path')
 const nodeExternals = require('webpack-node-externals')
-const CleanWebpackPlugin = require('clean-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
+const { webpackConfig } = require('@junhyung3224/common/index.common')
 
-const baseConfig = {
-    output: {
-        path: path.resolve(__dirname, 'dist'),
-        filename: '[name].js',
-        publicPath: '/dist'
-    },
-    module: {
-        rules: [
-            {
-                test: /\.jsx?$/,
-                exclude: /node_modules/,
-                loader: 'babel-loader'
-            }
-        ]
-    },
-    resolve: {
-        extensions: ['.js', '.jsx']
-    },
-    plugins: [new CleanWebpackPlugin('dist')]
-}
+const { baseConfig, appPath } = webpackConfig
 
 const clientConfig = {
     ...baseConfig,
-    entry: {
-        main: './src/index.jsx'
-    },
+    entry: appPath.client,
     plugins: [
         new HtmlWebpackPlugin({
             template: 'index.html'
@@ -38,9 +16,7 @@ const clientConfig = {
 
 const serverConfig = {
     ...baseConfig,
-    entry: {
-        server: './server/index.js'
-    },
+    entry: appPath.server,
     target: 'node',
     externals: [nodeExternals()]
 }
