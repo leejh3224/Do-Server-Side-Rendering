@@ -4,9 +4,16 @@
     "main": "index.js",
     "license": "MIT",
     "scripts": {
-        "wp": "webpack --config webpack.config.js -w",
-        "bb": "babel src -d ssr -w",
-        "start": "npx nodemon ./",
-        "dev": "npm-run-all --parallel wp bb start"
+        "wp": "webpack --config webpack.config.js -w --mode=development",
+        "start": "npx nodemon ./dist/server.js",
+        "dev": "npm-run-all --parallel wp start"
+    },
+    "devDependencies": {
+        "css-loader": "^2.0.0",
+        "isomorphic-style-loader": "^4.0.0",
+        "mini-css-extract-plugin": "^0.5.0",
+        "node-sass": "^4.11.0",
+        "sass-loader": "^7.1.0",
+        "style-loader": "^0.23.1"
     }
 }
