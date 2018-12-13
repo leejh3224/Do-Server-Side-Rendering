@@ -1,8 +1,5 @@
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
-const {
-    baseClientConfig,
-    baseServerConfig
-} = require('@junhyung3224/common/index.common')
+const { baseClientConfig, baseServerConfig } = require('@junhyung3224/common')
 
 const loaders = {
     css: {

@@ -1,6 +1,6 @@
 import express from 'express'
 import path from 'path'
-import errorHandler from './errorHandler'
+import { errorHandler } from '@junhyung3224/common'
 import serverRender from './serverRender'
 
 const PORT = process.env.PORT || 3000
