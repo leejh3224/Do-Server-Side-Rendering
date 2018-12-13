@@ -2,6 +2,7 @@ const path = require('path')
 const CleanWebpackPlugin = require('clean-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const nodeExternals = require('webpack-node-externals')
+const { HashedModuleIdsPlugin } = require('webpack')
 
 const appPath = {
     dist: path.resolve(process.cwd(), 'dist'),
@@ -16,7 +17,7 @@ const appPath = {
 const baseConfig = {
     output: {
         path: appPath.dist,
-        filename: '[name].js',
+        filename: '[name].[contenthash].js',
         publicPath: '/dist'
     },
     module: {
@@ -31,14 +32,31 @@ const baseConfig = {
     resolve: {
         extensions: ['.js', '.jsx']
     },
-    plugins: [new CleanWebpackPlugin('dist')]
+    plugins: [
+        new CleanWebpackPlugin(['dist'], {
+            root: process.cwd()
+        }),
+        new HashedModuleIdsPlugin()
+    ],
+    optimization: {
+        runtimeChunk: 'single',
+        splitChunks: {
+            cacheGroups: {
+                vendor: {
+                    test: /[\\/]node_modules[\\/]/,
+                    name: 'vendors',
+                    chunks: 'all'
+                }
+            }
+        }
+    }
 }
 
 const baseClientConfig = {
     ...baseConfig,
     entry: appPath.client,
     plugins: [
-        baseConfig.plugins[0],
+        ...baseConfig.plugins,
         new HtmlWebpackPlugin({
             template: 'index.html'
         })
@@ -48,6 +66,11 @@ const baseClientConfig = {
 const baseServerConfig = {
     ...baseConfig,
     entry: appPath.server,
+    output: {
+        path: appPath.dist,
+        filename: '[name].js',
+        publicPath: '/dist'
+    },
     target: 'node',
     externals: [
         nodeExternals({
@@ -55,7 +78,11 @@ const baseServerConfig = {
             // it should reference node_modules reside in root dir
             modulesDir: path.resolve(process.cwd(), '../../node_modules')
         })
-    ]
+    ],
+    optimization: {
+        ...baseConfig.optimization,
+        runtimeChunk: false
+    }
 }
 
 module.exports = {

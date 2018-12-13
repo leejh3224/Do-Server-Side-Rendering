@@ -26,7 +26,7 @@ const clientConfig = {
     plugins: [
         ...baseClientConfig.plugins,
         new MiniCssExtractPlugin({
-            filename: 'style.css'
+            filename: 'style.[contenthash].css'
         })
     ]
 }

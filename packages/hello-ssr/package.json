@@ -8,6 +8,9 @@
         "start": "npx nodemon ./dist/server.js",
         "dev": "npm-run-all --parallel wp start"
     },
+    "dependencies": {
+        "@junhyung3224/common": "^1.0.0"
+    },
     "devDependencies": {
         "css-loader": "^2.0.0",
         "isomorphic-style-loader": "^4.0.0",

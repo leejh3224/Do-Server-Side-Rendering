@@ -16,18 +16,24 @@
 
 ## Getting Started
 
-If all you want is working SSR code sample, you don't have to read all this.
-
 ```bash
-yarn && yarn run#[package_number]
-# you can check packages under packages folder
+# install node_modules in root and link local modules in [package]
+yarn && cd packages/[package]
 ```
 
-Above command will create directory `ssr` under specified package folder.
+```json
+// add below dependency in packages/[package_name]
+"dependencies": {
+    "@junhyung3224/common": "^1.0.0"
+},
+```
 
-And you're good to go.
+```bash
+# go to root and run
+cd ../.. && yarn run#[packages/package_number]
+```
 
-Go take a look at localhost:3000.
+Everything's ready! Go take a look at localhost:3000.
 
 ## What is SSR?
 
@@ -171,3 +177,7 @@ extensions:
 ## Issues
 
 -   React Loadable or other code-splitting libraries doesn't work well on server side with webpack 4
+
+```
+
+```
