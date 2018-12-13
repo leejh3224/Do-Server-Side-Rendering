@@ -17,13 +17,10 @@
 ## Getting Started
 
 ```bash
-# install node_modules in root and link local modules in [package]
-yarn && cd packages/[package]
-
-# go to root and run
+# install node_modules in root
 # if Error: Cannot find module 'path/to/package' happens,
 # execute yarn run#[package_number] again
-cd ../.. && yarn run#[packages/package_number]
+yarn && yarn run#[packages/package_number]
 ```
 
 Everything's ready! Go take a look at localhost:3000.
