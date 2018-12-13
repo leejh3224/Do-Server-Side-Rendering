@@ -1,16 +1,10 @@
-const nodeExternals = require('webpack-node-externals')
-const HtmlWebpackPlugin = require('html-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
-const { webpackConfig } = require('@junhyung3224/common/index.common')
-
-const { baseConfig, appPath } = webpackConfig
+const {
+    baseClientConfig,
+    baseServerConfig
+} = require('@junhyung3224/common/index.common')
 
 const loaders = {
-    babel: {
-        test: /\.jsx?$/,
-        exclude: /node_modules/,
-        loader: 'babel-loader'
-    },
     css: {
         loader: 'css-loader',
         options: {
@@ -22,11 +16,10 @@ const loaders = {
 }
 
 const clientConfig = {
-    ...baseConfig,
-    entry: appPath.client,
+    ...baseClientConfig,
     module: {
         rules: [
-            loaders.babel,
+            baseClientConfig.module.rules[0],
             {
                 test: /\.scss$/,
                 use: [MiniCssExtractPlugin.loader, loaders.css, loaders.scss]
@@ -34,9 +27,7 @@ const clientConfig = {
         ]
     },
     plugins: [
-        new HtmlWebpackPlugin({
-            template: 'index.html'
-        }),
+        ...baseClientConfig.plugins,
         new MiniCssExtractPlugin({
             filename: 'style.css'
         })
@@ -44,13 +35,10 @@ const clientConfig = {
 }
 
 const serverConfig = {
-    ...baseConfig,
-    entry: appPath.server,
-    target: 'node',
-    externals: [nodeExternals()],
+    ...baseServerConfig,
     module: {
         rules: [
-            loaders.babel,
+            baseServerConfig.module.rules[0],
             {
                 test: /\.scss$/,
                 use: [

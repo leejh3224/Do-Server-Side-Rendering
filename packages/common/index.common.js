@@ -1,34 +1,65 @@
 /** commonjs modules */
 const path = require('path')
 const CleanWebpackPlugin = require('clean-webpack-plugin')
+const HtmlWebpackPlugin = require('html-webpack-plugin')
+const nodeExternals = require('webpack-node-externals')
 
-module.exports.webpackConfig = {
-    baseConfig: {
-        output: {
-            path: path.resolve(__dirname, 'dist'),
-            filename: '[name].js',
-            publicPath: '/dist'
-        },
-        module: {
-            rules: [
-                {
-                    test: /\.jsx?$/,
-                    exclude: /node_modules/,
-                    loader: 'babel-loader'
-                }
-            ]
-        },
-        resolve: {
-            extensions: ['.js', '.jsx']
-        },
-        plugins: [new CleanWebpackPlugin('dist')]
+const appPath = {
+    dist: path.resolve(process.cwd(), 'dist'),
+    client: {
+        main: path.resolve(process.cwd(), 'src/index.jsx')
     },
-    appPath: {
-        client: {
-            main: './src/index.jsx'
-        },
-        server: {
-            server: './server/index.js'
-        }
+    server: {
+        server: path.resolve(process.cwd(), 'server/index.js')
     }
+}
+
+const baseConfig = {
+    output: {
+        path: appPath.dist,
+        filename: '[name].js',
+        publicPath: '/dist'
+    },
+    module: {
+        rules: [
+            {
+                test: /\.jsx?$/,
+                exclude: /node_modules/,
+                loader: 'babel-loader'
+            }
+        ]
+    },
+    resolve: {
+        extensions: ['.js', '.jsx']
+    },
+    plugins: [new CleanWebpackPlugin('dist')]
+}
+
+const baseClientConfig = {
+    ...baseConfig,
+    entry: appPath.client,
+    plugins: [
+        baseConfig.plugins[0],
+        new HtmlWebpackPlugin({
+            template: 'index.html'
+        })
+    ]
+}
+
+const baseServerConfig = {
+    ...baseConfig,
+    entry: appPath.server,
+    target: 'node',
+    externals: [
+        nodeExternals({
+            // yarn workspace issue: https://stackoverflow.com/questions/46010926/how-to-use-webpack-with-a-monorepo-yarnpkg-workspaces
+            // it should reference node_modules reside in root dir
+            modulesDir: path.resolve(process.cwd(), '../../node_modules')
+        })
+    ]
+}
+
+module.exports = {
+    baseClientConfig,
+    baseServerConfig
 }

@@ -1,10 +1,9 @@
 import fs from 'fs'
 import path from 'path'
+import util from 'util'
 import React from 'react'
 import { renderToString } from 'react-dom/server'
 import App from '../src/App'
-
-const util = require('util')
 
 export default async (req, res, next) => {
     const readFile = util.promisify(fs.readFile)

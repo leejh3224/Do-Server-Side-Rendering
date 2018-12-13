@@ -4,9 +4,11 @@
     "main": "index.js",
     "license": "MIT",
     "scripts": {
-        "wp": "webpack --config webpack.config.js -w",
-        "bb": "babel src -d ssr -w",
-        "start": "npx nodemon ./",
-        "dev": "npm-run-all --parallel wp bb start"
+        "wp": "webpack --config webpack.config.js -w --mode=development",
+        "start": "nodemon ./dist/server.js",
+        "dev": "npm-run-all --parallel wp start"
+    },
+    "dependencies": {
+        "jsdom": "^13.0.0"
     }
 }
