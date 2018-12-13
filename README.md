@@ -111,10 +111,6 @@ Then what are the alternatives?
 
 ## Babel & Webpack for SSR
 
-I'm not gonna explain what Babel or Webpack is in detail.
-
-And will focus on 'how to use them'.
-
 -   Why we bother with 'fancy frontend tools'?
 
     A: That's because of subtle mismatch between Node/React module system.
@@ -122,51 +118,6 @@ And will focus on 'how to use them'.
     In contrary to Node.js, React.js uses module system called `ESM` or `Ecmascript Module`.
     So, in order to run frontend codes in server side, you have to convert your
     code into something that Node.js can undertand.
-
-Babel: turns your frontend code into the code that Node.js can understand so that run it.
-
-Webpack:
-
-Webpack is a js module bundler.
-
-What is module bundler? You can think of it as tool that makes dependency tree for you.
-
-So if x.js requires y.js file or vise versa, webpack will handle this for you.
-
-It is also required to load static assets like html, css, images into your js projects.
-
-For our SSR example project, configuration file will look something like below.
-
-```js
-const path = require('path')
-
-module.exports = {
-    // webpack 4 provides you with reasonable default configurations
-    // Check https://webpack.js.org/concepts/mode/
-    mode: 'development',
-    // render.jsx will be our entry point
-    entry: {
-        bundle: './src/render.jsx',
-    },
-    output: {
-        path: path.resolve(__dirname, 'dist'),
-        filename: '[name].js',
-    },
-    // Now webpack can tell .jsx file from .js files
-    resolve: {
-        extensions: ['.js', '.jsx'],
-    },
-    module: {
-        rules: [
-            {
-                test: /\.jsx?$/,
-                exclude: /node_modules/,
-                loader: 'babel-loader',
-            },
-        ],
-    },
-}
-```
 
 ## Hello, SSR
 
@@ -179,6 +130,8 @@ check [styled-components#Advanced](https://www.styled-components.com/docs/advanc
 useful tools:
 
 -   babel-plugin-styled-components: makes classnames more readable so that make it easy to debug styles
+
+If you use scss/css-modules, check `sassy-ssr` package.
 
 ## Integrating Router/Redux/ReduxSaga
 
