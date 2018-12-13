@@ -19,17 +19,10 @@
 ```bash
 # install node_modules in root and link local modules in [package]
 yarn && cd packages/[package]
-```
 
-```json
-// add below dependency in packages/[package_name]
-"dependencies": {
-    "@junhyung3224/common": "^1.0.0"
-},
-```
-
-```bash
 # go to root and run
+# if Error: Cannot find module 'path/to/package' happens,
+# execute yarn run#[package_number] again
 cd ../.. && yarn run#[packages/package_number]
 ```
 
