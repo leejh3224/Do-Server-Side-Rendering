@@ -1,23 +1,27 @@
 {
-    "name": "@junhyung3224/router-redux-ssr",
-    "version": "1.0.0",
-    "main": "index.js",
-    "license": "MIT",
-    "scripts": {
-        "wp": "webpack --config webpack.config.js -w --mode=development",
-        "start": "nodemon ./dist/server.js",
-        "dev": "npm-run-all --parallel wp start"
-    },
-    "dependencies": {
-        "jsdom": "^13.0.0",
-        "react-redux": "^6.0.0",
-        "react-router-dom": "^4.3.1",
-        "redux": "^4.0.1",
-        "redux-saga": "^0.16.2",
-        "styled-components": "^4.1.2",
-        "@junhyung3224/common": "^1.0.0"
-    },
-    "devDependencies": {
-        "babel-plugin-styled-components": "^1.9.4"
-    }
+  "name": "@junhyung3224/router-redux-ssr",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "wp": "webpack --config webpack.config.js -w --mode=development",
+    "start": "nodemon ./dist/server.js",
+    "dev": "npm-run-all --parallel wp start",
+    "snyk-protect": "snyk protect",
+    "prepublish": "npm run snyk-protect"
+  },
+  "dependencies": {
+    "jsdom": "^13.0.0",
+    "react-redux": "^6.0.0",
+    "react-router-dom": "^4.3.1",
+    "redux": "^4.0.1",
+    "redux-saga": "^0.16.2",
+    "styled-components": "^4.1.2",
+    "@junhyung3224/common": "^1.0.0",
+    "snyk": "^1.189.0"
+  },
+  "devDependencies": {
+    "babel-plugin-styled-components": "^1.9.4"
+  },
+  "snyk": true
 }
