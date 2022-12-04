@@ -13,7 +13,7 @@
         "run#3": "yarn workspace @junhyung3224/sassy-ssr dev"
     },
     "dependencies": {
-        "express": "^4.16.4",
+        "express": "^4.17.3",
         "react": "^16.6.3",
         "react-dom": "^16.6.3"
     },
